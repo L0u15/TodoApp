@@ -57,13 +57,11 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Todo todo = (Todo) parent.getItemAtPosition(position);
-        Log.i(TAG,"Click sur un item:"+todo);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(DATA_TODO_KEY,todo);
-        Intent intent= new Intent(this,DisplayTodo.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
+        this.currentTodo = todosAdapter.getItem(position);
+        Log.i(TAG,"Click sur un item:"+this.currentTodo);
+        Intent intent= new Intent(this,EditTodo.class);
+        intent.putExtra(DATA_TODO_KEY,currentTodo);
+        startActivityForResult(intent,EDIT_TODO_RESULT);
 
     }
 
